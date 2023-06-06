@@ -1,4 +1,5 @@
 const controle = document.querySelectorAll("[data-controle]");
+const estatisticas = document.querySelectorAll("[data-estatisticas");
 
 const pecas = {
     "bracos": {
@@ -32,22 +33,30 @@ const pecas = {
         "energia": 0,
         "velocidade": -2
     }
-}
+};
 
 controle.forEach( (elemento) => {
     elemento.addEventListener("click", (evento) => {
         manipulaDados(evento.target.dataset.controle, evento.target.parentNode)
-    })
-})
+        atualizaEstatisticas(evento.target.dataset.peca);
+    });
+});
 
 //Aqui estamos utilizando uma função anônima, ou seja, ela não tem nome. Também nomeada de 'arrow function', podemos utilizar: "() =>" 
 function manipulaDados (operacao, controle) {
-    const peca = controle.querySelector("[data-contador]")
+    const peca = controle.querySelector("[data-contador]");
     
     if(operacao === "-") {
         peca.value = parseInt(peca.value) - 1
     } else {
         peca.value = parseInt(peca.value) + 1
-    }
-}
+    };
+};
 
+function atualizaEstatisticas(peca) { 
+    console.log();
+
+    estatisticas.forEach( (elemento) => {
+        elemento.textContent = parseInt(elemento.textContent) + pecas[peca][elemento.dataset.estatisticas]
+    });
+};
